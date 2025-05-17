@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login and Slideshow Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: linear-gradient(to right, #e0eafc, #cfdef3); display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; }
+    .hidden { display: none; }
+    .centered {
+      max-width: 500px;
+      width: 100%;
+      margin: auto;
+      padding: 2rem;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      margin-top: 1rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .tab-content {
+      display: none;
+      padding: 1rem;
+      background: #ffffff;
+      border-radius: 8px;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .tab-content.active {
+      display: block;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+    }
+    h2, h3 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .tabs button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #f1c40f;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tabs button:hover {
+      background-color: #f39c12;
+    }
+    #mainPage {
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page -->
+  <div id="loginPage" class="centered">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email" required />
+    <input type="password" id="loginPassword" placeholder="Password" required />
+    <button onclick="login()">Login</button>
+    <p id="loginMessage" style="color:red;"></p>
+  </div>
+
+  <!-- Main Content Page -->
+  <div id="mainPage" class="hidden centered">
+    <h2>Software Development Languages</h2>
+    <div class="tabs">
+      <button class="tab" data-target="html">HTML</button>
+      <button class="tab" data-target="js">JavaScript</button>
+      <button class="tab" data-target="python">Python</button>
+    </div>
+
+    <div id="html" class="tab-content active">
+      <h3>HTML</h3>
+      <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+      <p>HTML is used for structuring web content and forms the backbone of web pages.</p>
+    </div>
+
+    <div id="js" class="tab-content">
+      <h3>JavaScript</h3>
+      <pre>document.getElementById("demo").innerHTML = "Hello JavaScript!";
+
+function greet(name) {
+  return `Hello, ${name}!`;
+}</pre>
+      <p>JavaScript is used for creating interactive and dynamic user interfaces in web applications.</p>
+    </div>
+
+    <div id="python" class="tab-content">
+      <h3>Python</h3>
+      <pre>def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("World"))</pre>
+      <p>Python is widely used for scripting, web development, data science, and automation.</p>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const message = document.getElementById('loginMessage');
+
+      if (email && password) {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+      } else {
+        message.textContent = 'Please enter both email and password.';
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
